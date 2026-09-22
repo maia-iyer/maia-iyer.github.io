@@ -1,0 +1,14 @@
+{
+  "name": "Maia Iyer",
+  "title": "Maia Iyer",
+  "description": "Maia Iyer — Research Software Engineer at IBM Research. Zero trust, agentic security, and multicloud security.",
+  "role": "Research Software Engineer · IBM Research",
+  "lede": "Building secure-by-default, identity-first systems for zero trust, agentic security, and multicloud.",
+  "portrait": "/assets/maia-iyer.jpg",
+  "portraitAlt": "Portrait of Maia Iyer",
+  "social": [
+    { "label": "GitHub", "url": "https://github.com/maia-iyer" },
+    { "label": "LinkedIn", "url": "https://www.linkedin.com/in/maia-iyer" },
+    { "label": "Medium", "url": "https://medium.com/@maiaiyer" }
+  ]
+}

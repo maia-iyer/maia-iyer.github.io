@@ -1,0 +1,20 @@
+{
+  "name": "maia-iyer.github.io",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Personal site for Maia Iyer",
+  "scripts": {
+    "start": "eleventy --serve",
+    "build": "eleventy",
+    "clean": "rm -rf _site"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maia-iyer/maia-iyer.github.io.git"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "@11ty/eleventy": "^3.1.2"
+  }
+}

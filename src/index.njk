@@ -1,0 +1,225 @@
+---
+permalink: /
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="{{ site.description }}" />
+    <title>{{ site.title }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:ital,wght@0,500;0,600;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <div class="atmosphere" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <nav class="nav" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#writing">Writing</a>
+        <a href="#talks">Talks</a>
+        <a href="#credentials">Credentials</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="name">
+        <div class="hero-copy">
+          <p class="eyebrow reveal">{{ site.role }}</p>
+          <h1 id="name" class="name reveal">{{ site.name }}</h1>
+          <p class="lede reveal">{{ site.lede }}</p>
+          <ul class="social reveal" aria-label="Social links">
+            {% for link in site.social %}
+            <li>
+              <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer"
+                >{{ link.label }}</a
+              >
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        <img
+          class="portrait reveal"
+          src="{{ site.portrait }}"
+          alt="{{ site.portraitAlt }}"
+          width="160"
+          height="160"
+        />
+      </section>
+
+      <section id="about" class="section reveal">
+        <h2>About</h2>
+        <div class="prose">
+          {% for page in collections.about %}
+          {{ page.templateContent | safe }}
+          {% endfor %}
+        </div>
+      </section>
+
+      <section id="experience" class="section reveal">
+        <h2>Experience</h2>
+        <ul class="list">
+          {% for item in collections.experience %}
+          <li class="list-item">
+            <div class="list-heading">
+              <h3>{{ item.data.title }}</h3>
+              <span class="dates">{{ item.data.dates }}</span>
+            </div>
+            <div class="list-meta">
+              <span class="org">{{ item.data.org }}</span>
+            </div>
+            {{ item.templateContent | safe }}
+          </li>
+          {% endfor %}
+        </ul>
+      </section>
+
+      <section id="projects" class="section reveal">
+        <h2>Projects</h2>
+        <ul class="list">
+          {% for item in collections.projects %}
+          <li class="list-item">
+            <div class="list-heading">
+              <h3>
+                <a
+                  href="{{ item.data.url }}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >{{ item.data.title }}</a
+                >
+              </h3>
+              <span class="org">{{ item.data.role }}</span>
+            </div>
+            {{ item.templateContent | safe }}
+          </li>
+          {% endfor %}
+        </ul>
+      </section>
+
+      <section id="writing" class="section reveal">
+        <h2>Writing</h2>
+
+        <h3 class="subhead">Medium</h3>
+        <ul class="list compact">
+          {% for item in collections.writing %}
+          {% if item.data.type == "medium" %}
+          <li class="list-item">
+            <a
+              href="{{ item.data.url }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              >{{ item.data.title }}</a
+            >
+            <span class="dates">{{ item.data.meta }}</span>
+          </li>
+          {% endif %}
+          {% endfor %}
+        </ul>
+
+        <h3 class="subhead">Papers</h3>
+        <ul class="list compact">
+          {% for item in collections.writing %}
+          {% if item.data.type == "paper" %}
+          <li class="list-item">
+            <a
+              href="{{ item.data.url }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              >{{ item.data.title }}</a
+            >
+            <span class="dates">{{ item.data.meta }}</span>
+          </li>
+          {% endif %}
+          {% endfor %}
+        </ul>
+      </section>
+
+      <section id="talks" class="section reveal">
+        <h2>Talks</h2>
+
+        <h3 class="subhead">Upcoming</h3>
+        <ul class="list compact">
+          {% for item in collections.talks %}
+          {% if item.data.status == "upcoming" %}
+          <li class="list-item">
+            {% if item.data.url %}
+            <a
+              href="{{ item.data.url }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              >{{ item.data.title }}</a
+            >
+            {% else %}
+            <span class="talk-title">{{ item.data.title }}</span>
+            {% endif %}
+            <span class="dates">{{ item.data.meta }}</span>
+          </li>
+          {% endif %}
+          {% endfor %}
+        </ul>
+
+        <h3 class="subhead">Recorded</h3>
+        <ul class="list compact">
+          {% for item in collections.talks %}
+          {% if item.data.status == "recorded" %}
+          <li class="list-item">
+            <a
+              href="{{ item.data.url }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              >{{ item.data.title }}</a
+            >
+            <span class="dates">{{ item.data.meta }}</span>
+          </li>
+          {% endif %}
+          {% endfor %}
+        </ul>
+      </section>
+
+      <section id="credentials" class="section reveal">
+        <h2>Credentials</h2>
+        <ul class="badge-row" aria-label="Credly badges">
+          {% for item in collections.credentials %}
+          <li class="badge-slot">
+            {% if item.data.image %}
+            {% if item.data.url %}
+            <a href="{{ item.data.url }}" target="_blank" rel="noopener noreferrer">
+              <img src="{{ item.data.image }}" alt="{{ item.data.label }}" />
+            </a>
+            {% else %}
+            <img src="{{ item.data.image }}" alt="{{ item.data.label }}" />
+            {% endif %}
+            {% else %}
+            <span class="badge-label">{{ item.data.label }}</span>
+            <span class="badge-hint">{{ item.data.hint }}</span>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+      </section>
+    </main>
+
+    <footer class="site-footer reveal">
+      <p>© <span id="year"></span> {{ site.name }}</p>
+      <ul class="social" aria-label="Footer social links">
+        {% for link in site.social %}
+        <li>
+          <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer"
+            >{{ link.label }}</a
+          >
+        </li>
+        {% endfor %}
+      </ul>
+    </footer>
+
+    <script src="/js/main.js"></script>
+  </body>
+</html>
