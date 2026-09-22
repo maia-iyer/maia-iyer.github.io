@@ -1,6 +1,5 @@
 ---
 permalink: false
-eleventyExcludeFromCollections: true
 ---
 
 I'm a Research Software Engineer at IBM Research with over four years of experience focused on zero trust, agentic security, and multicloud security. I specialize in secure-by-default, identity-first approaches.
