@@ -7,12 +7,8 @@ export default function (eleventyConfig) {
     collection.getFilteredByGlob("src/about.md")
   );
 
-  eleventyConfig.addCollection("experience", (collection) =>
-    collection.getFilteredByGlob("src/experience/*.md").sort((a, b) => a.data.order - b.data.order)
-  );
-
-  eleventyConfig.addCollection("projects", (collection) =>
-    collection.getFilteredByGlob("src/projects/*.md").sort((a, b) => a.data.order - b.data.order)
+  eleventyConfig.addCollection("works", (collection) =>
+    collection.getFilteredByGlob("src/works/*.md").sort((a, b) => a.data.order - b.data.order)
   );
 
   eleventyConfig.addCollection("writing", (collection) =>
@@ -21,6 +17,10 @@ export default function (eleventyConfig) {
 
   eleventyConfig.addCollection("talks", (collection) =>
     collection.getFilteredByGlob("src/talks/*.md").sort((a, b) => a.data.order - b.data.order)
+  );
+
+  eleventyConfig.addCollection("experience", (collection) =>
+    collection.getFilteredByGlob("src/experience/*.md").sort((a, b) => a.data.order - b.data.order)
   );
 
   eleventyConfig.addCollection("credentials", (collection) =>

@@ -19,11 +19,11 @@ Open the URL Eleventy prints (usually `http://localhost:8080`).
 | --- | --- |
 | Name, role, social links | `src/_data/site.json` |
 | About bio | `src/about.md` |
-| Experience | `src/experience/*.md` |
-| Projects | `src/projects/*.md` |
-| Writing | `src/writing/*.md` |
-| Talks | `src/talks/*.md` |
-| Credly badges | `src/credentials/*.md` |
+| Highlighted works | `src/works/*.md` |
+| Technical publications (Medium + papers) | `src/writing/*.md` |
+| Conference talks | `src/talks/*.md` |
+| Industry experience | `src/experience/*.md` |
+| Education & credentials | `src/credentials/*.md` |
 | Layout / styles | `src/index.njk`, `src/css/styles.css` |
 
 ## Deploy

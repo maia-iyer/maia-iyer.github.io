@@ -22,11 +22,10 @@ permalink: /
     <header class="site-header">
       <nav class="nav" aria-label="Primary">
         <a href="#about">About</a>
-        <a href="#experience">Experience</a>
-        <a href="#projects">Projects</a>
-        <a href="#writing">Writing</a>
+        <a href="#works">Highlighted works</a>
+        <a href="#publications">Publications</a>
         <a href="#talks">Talks</a>
-        <a href="#credentials">Credentials</a>
+        <a href="#experience">Experience</a>
       </nav>
     </header>
 
@@ -64,39 +63,25 @@ permalink: /
         </div>
       </section>
 
-      <section id="experience" class="section reveal">
-        <h2>Experience</h2>
+      <section id="works" class="section reveal">
+        <h2>Highlighted works</h2>
         <ul class="list">
-          {% for item in collections.experience %}
-          <li class="list-item">
-            <div class="list-heading">
-              <h3>{{ item.data.title }}</h3>
-              <span class="dates">{{ item.data.dates }}</span>
-            </div>
-            <div class="list-meta">
-              <span class="org">{{ item.data.org }}</span>
-            </div>
-            {{ item.templateContent | safe }}
-          </li>
-          {% endfor %}
-        </ul>
-      </section>
-
-      <section id="projects" class="section reveal">
-        <h2>Projects</h2>
-        <ul class="list">
-          {% for item in collections.projects %}
+          {% for item in collections.works %}
           <li class="list-item">
             <div class="list-heading">
               <h3>
+                {% if item.data.url %}
                 <a
                   href="{{ item.data.url }}"
                   target="_blank"
                   rel="noopener noreferrer"
                   >{{ item.data.title }}</a
                 >
+                {% else %}
+                {{ item.data.title }}
+                {% endif %}
               </h3>
-              <span class="org">{{ item.data.role }}</span>
+              <span class="org">{{ item.data.kind }}</span>
             </div>
             {{ item.templateContent | safe }}
           </li>
@@ -104,8 +89,8 @@ permalink: /
         </ul>
       </section>
 
-      <section id="writing" class="section reveal">
-        <h2>Writing</h2>
+      <section id="publications" class="section reveal">
+        <h2>Technical Publications</h2>
 
         <h3 class="subhead">Medium</h3>
         <ul class="list compact">
@@ -124,7 +109,7 @@ permalink: /
           {% endfor %}
         </ul>
 
-        <h3 class="subhead">Papers</h3>
+        <h3 class="subhead">Peer-reviewed papers</h3>
         <ul class="list compact">
           {% for item in collections.writing %}
           {% if item.data.type == "paper" %}
@@ -143,7 +128,7 @@ permalink: /
       </section>
 
       <section id="talks" class="section reveal">
-        <h2>Talks</h2>
+        <h2>Conference talks</h2>
 
         <h3 class="subhead">Upcoming</h3>
         <ul class="list compact">
@@ -166,7 +151,7 @@ permalink: /
           {% endfor %}
         </ul>
 
-        <h3 class="subhead">Recorded</h3>
+        <h3 class="subhead">Previous</h3>
         <ul class="list compact">
           {% for item in collections.talks %}
           {% if item.data.status == "recorded" %}
@@ -184,9 +169,27 @@ permalink: /
         </ul>
       </section>
 
-      <section id="credentials" class="section reveal">
-        <h2>Credentials</h2>
-        <ul class="badge-row" aria-label="Credly badges">
+      <section id="experience" class="section reveal">
+        <h2>Experience</h2>
+
+        <h3 class="subhead">Industry</h3>
+        <ul class="list">
+          {% for item in collections.experience %}
+          <li class="list-item">
+            <div class="list-heading">
+              <h3>{{ item.data.title }}</h3>
+              <span class="dates">{{ item.data.dates }}</span>
+            </div>
+            <div class="list-meta">
+              <span class="org">{{ item.data.org }}</span>
+            </div>
+            {{ item.templateContent | safe }}
+          </li>
+          {% endfor %}
+        </ul>
+
+        <h3 class="subhead">Education &amp; credentials</h3>
+        <ul class="badge-row" aria-label="Education and credentials">
           {% for item in collections.credentials %}
           <li class="badge-slot">
             {% if item.data.image %}
