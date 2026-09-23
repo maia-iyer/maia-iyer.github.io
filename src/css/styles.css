@@ -303,6 +303,181 @@ main {
   line-height: 1.45;
 }
 
+.works-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem 1.35rem;
+  align-items: stretch;
+}
+
+.works-grid .list-item {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 0;
+  border-top: none;
+}
+
+.works-grid .list-item > .list-heading {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2rem;
+  margin-bottom: 0.25rem;
+}
+
+.works-grid .list-item h3 {
+  font-size: 0.95rem;
+  line-height: 1.3;
+}
+
+.works-grid .talk-heading {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+}
+
+.works-grid .list-item p {
+  flex: 1;
+}
+
+.work-media {
+  display: block;
+  margin-top: 0.85rem;
+  width: 100%;
+}
+
+.work-embed {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  overflow: hidden;
+  background: #0f1419;
+  cursor: pointer;
+  aspect-ratio: 16 / 9;
+  transition: border-color 0.2s var(--ease), transform 0.35s var(--ease);
+}
+
+.work-embed:hover,
+.work-embed:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+  outline: none;
+}
+
+.work-embed img,
+.work-embed iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 0;
+}
+
+.work-embed iframe {
+  position: absolute;
+  inset: 0;
+}
+
+.work-embed-play {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent) 88%, #000);
+  box-shadow: 0 0.35rem 1rem rgba(15, 20, 25, 0.28);
+  transition: transform 0.3s var(--ease), background 0.2s var(--ease);
+}
+
+.work-embed-play::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 53%;
+  transform: translate(-50%, -50%);
+  border-style: solid;
+  border-width: 0.45rem 0 0.45rem 0.75rem;
+  border-color: transparent transparent transparent #fff;
+}
+
+.work-embed:hover .work-embed-play,
+.work-embed:focus-visible .work-embed-play {
+  transform: scale(1.06);
+  background: var(--accent);
+}
+
+.work-embed.is-playing .work-embed-play,
+.work-embed.is-playing > img {
+  display: none;
+}
+
+.work-preview {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  overflow: hidden;
+  background: var(--surface);
+  transition: border-color 0.2s var(--ease), background 0.2s var(--ease);
+}
+
+.work-preview:hover,
+.work-preview:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--line));
+  background: rgba(255, 255, 255, 0.72);
+  color: inherit;
+  text-decoration: none;
+  outline: none;
+}
+
+.work-preview-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  object-fit: cover;
+  border-bottom: 1px solid var(--line);
+}
+
+.work-preview-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.7rem 0.85rem 0.8rem;
+}
+
+.work-preview-host {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.work-preview-title {
+  font-family: var(--font-serif);
+  font-size: 0.975rem;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+.work-preview:hover .work-preview-title,
+.work-preview:focus-visible .work-preview-title {
+  color: var(--accent);
+}
+
+.work-preview-dek {
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--ink-soft);
+}
+
 .talk-heading {
   display: flex;
   flex-wrap: wrap;
@@ -397,6 +572,27 @@ main {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .works-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .works-grid .list-item {
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .works-grid .list-item:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .works-grid .work-media {
+    max-width: 28rem;
   }
 }
 

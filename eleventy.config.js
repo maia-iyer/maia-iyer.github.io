@@ -3,6 +3,28 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/assets");
   eleventyConfig.addPassthroughCopy("src/js");
 
+  // Extract a YouTube video id from watch / youtu.be / embed / shorts URLs.
+  eleventyConfig.addFilter("youtubeId", (url) => {
+    if (!url || typeof url !== "string") return null;
+    const patterns = [
+      /(?:youtube\.com\/watch\?(?:[^#]*&)?v=|youtube\.com\/embed\/|youtube\.com\/shorts\/|youtu\.be\/)([A-Za-z0-9_-]{11})/,
+    ];
+    for (const pattern of patterns) {
+      const match = url.match(pattern);
+      if (match) return match[1];
+    }
+    return null;
+  });
+
+  eleventyConfig.addFilter("linkHost", (url) => {
+    if (!url || typeof url !== "string" || url === "#") return null;
+    try {
+      return new URL(url).hostname.replace(/^www\./, "");
+    } catch {
+      return null;
+    }
+  });
+
   eleventyConfig.addCollection("about", (collection) =>
     collection.getFilteredByGlob("src/about.md")
   );

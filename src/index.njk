@@ -1,14 +1,65 @@
 ---
 permalink: /
 ---
-{% macro talkLinks(item) %}
-{% if item.data.recording or item.data.slides or item.data.poster or item.data.event %}
+{% macro talkLinks(item, skipRecording=false) %}
+{% set showRecording = item.data.recording and not skipRecording %}
+{% if showRecording or item.data.slides or item.data.poster or item.data.event %}
 <span class="talk-links">
-  {% if item.data.recording %}<a href="{{ item.data.recording }}" target="_blank" rel="noopener noreferrer">[recording]</a>{% endif %}
+  {% if showRecording %}<a href="{{ item.data.recording }}" target="_blank" rel="noopener noreferrer">[recording]</a>{% endif %}
   {% if item.data.slides %}<a href="{{ item.data.slides }}" target="_blank" rel="noopener noreferrer">[slides]</a>{% endif %}
   {% if item.data.poster %}<a href="{{ item.data.poster }}" target="_blank" rel="noopener noreferrer">[poster]</a>{% endif %}
   {% if item.data.event %}<a href="{{ item.data.event }}" target="_blank" rel="noopener noreferrer">[event]</a>{% endif %}
 </span>
+{% endif %}
+{% endmacro %}
+{% macro workMedia(item) %}
+{% set yt = item.data.recording | youtubeId %}
+{% if item.data.embed != false and yt %}
+<div class="work-media">
+  <button
+    type="button"
+    class="work-embed"
+    data-youtube-id="{{ yt }}"
+    aria-label="Play recording: {{ item.data.title }}"
+  >
+    <img
+      src="https://i.ytimg.com/vi/{{ yt }}/hqdefault.jpg"
+      alt=""
+      width="480"
+      height="360"
+      loading="lazy"
+      decoding="async"
+    />
+    <span class="work-embed-play" aria-hidden="true"></span>
+  </button>
+</div>
+{% elif item.data.embed != false and item.data.url and item.data.url != "#" %}
+{% set host = item.data.url | linkHost %}
+<a
+  class="work-media work-preview"
+  href="{{ item.data.url }}"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  {% if item.data.image %}
+  <img
+    class="work-preview-image"
+    src="{{ item.data.image }}"
+    alt=""
+    width="320"
+    height="180"
+    loading="lazy"
+    decoding="async"
+  />
+  {% endif %}
+  <span class="work-preview-body">
+    {% if host %}<span class="work-preview-host">{{ host }}</span>{% endif %}
+    <span class="work-preview-title">{{ item.data.title }}</span>
+    {% if item.data.preview %}
+    <span class="work-preview-dek">{{ item.data.preview }}</span>
+    {% endif %}
+  </span>
+</a>
 {% endif %}
 {% endmacro %}
 <!DOCTYPE html>
@@ -75,15 +126,16 @@ permalink: /
 
       <section id="works" class="section reveal">
         <h2>Highlighted works</h2>
-        <ul class="list">
+        <ul class="list works-grid">
           {% for item in collections.works %}
           <li class="list-item">
             <div class="list-heading">
+              <span class="org">{{ item.data.kind }}</span>
               <h3>
                 {% if item.data.status %}
                 <span class="talk-heading">
                   <span class="talk-title">{{ item.data.title }}</span>
-                  {{ talkLinks(item) }}
+                  {{ talkLinks(item, item.data.embed != false and (item.data.recording | youtubeId)) }}
                 </span>
                 {% elif item.data.url %}
                 <a
@@ -96,9 +148,9 @@ permalink: /
                 {{ item.data.title }}
                 {% endif %}
               </h3>
-              <span class="org">{{ item.data.kind }}</span>
             </div>
             {{ item.templateContent | safe }}
+            {{ workMedia(item) }}
           </li>
           {% endfor %}
         </ul>

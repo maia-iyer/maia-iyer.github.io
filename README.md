@@ -50,6 +50,17 @@ featuredOrder: 1    # sort key within Highlighted works only
 
 Put the short blurb in the markdown body (below the frontmatter). That body is used only in Highlighted works; the Talks / Publications lists ignore it.
 
+Featured entries can show media under the blurb:
+
+- **Talks / podcasts** with a YouTube `recording:` URL get a click-to-play embed automatically.
+- **Writing** with an external `url:` get a Medium-style link preview. Optional fields:
+
+```yaml
+image: /assets/previews/mcp-oauth.jpg   # cover image
+preview: Short dek shown in the preview # optional subtitle
+embed: false                            # opt out of media for this entry
+```
+
 To change what’s featured, toggle `featured` / `featuredOrder` on the source file — no duplicates to keep in sync.
 
 ## Deploy
