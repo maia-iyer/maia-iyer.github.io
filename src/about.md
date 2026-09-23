@@ -2,8 +2,8 @@
 permalink: false
 ---
 
-I'm a Research Software Engineer at [IBM Research](https://research.ibm.com) with over four years of experience focused on **zero trust, agentic security, and multicloud**. I specialize in secure-by-default, identity-first approaches.
+I'm an Advisory Software Engineer at [IBM Research](https://research.ibm.com) with over four years of industry research experience with special interest in **distributed systems, security, and agentic systems primitives**. 
 
 I'm a maintainer of the [Kagenti](https://rossoctl.dev) (rossoctl) project towards platform primitives that establish a zero-trust architecture. I'm also a maintainer of the open-source [Tornjak](https://github.com/spiffe/tornjak) project ([SPIFFE](https://spiffe.io) community) where I help drive the adoption of [SPIRE](https://github.com/spiffe/spire) as an open-source identity standard for secure cloud-native ecosystems.
 
-I'm passionate about sharing knowledge through talks and blogs. My current research focuses on how zero trust security principles apply to the emerging agentic world.
+I'm deeply passionate about technical education and community engagement. Whether speaking at conferences, designing hands-on workshops, or writing architectural deep-dives, I view communication as a core engineering responsibility - empowering the greater ecosystem with actionable ideas to build trustworthy systems. 
