@@ -21,8 +21,8 @@ Open the URL Eleventy prints (usually `http://localhost:8080`).
 | About bio | `src/about.md` |
 | Technical publications (Medium + papers) | `src/writing/*.md` |
 | Conference talks & podcasts | `src/talks/*.md` |
-| Industry experience | `src/experience/*.md` |
-| Education & credentials | `src/credentials/*.md` |
+| Experience & education | `src/experience/*.md` — set `logo:` to a file under `src/assets/orgs/` |
+| Credentials badges | `src/credentials/*.md` |
 | Layout / styles | `src/index.njk`, `src/css/styles.css` |
 
 ### Talks (`src/talks/*.md`)

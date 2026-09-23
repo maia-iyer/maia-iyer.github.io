@@ -1,9 +1,10 @@
 ---
-title: Research Software Engineer
-org: IBM Research
-dates: 2021 — Present
+title: Advisory & Research Software Engineer
+org: IBM T.J. Watson Research Center
+dates: Aug 2022 — Present
+logo: /assets/orgs/ibm.svg
 order: 1
 permalink: false
 ---
 
-Zero trust, agentic security, and multicloud security. Building identity-first platform primitives and contributing to open-source SPIFFE/SPIRE ecosystem projects.
+Maintainer of [Tornjak](https://github.com/spiffe/tornjak) and Kagenti (now [rossoctl](https://rossoctl.dev))

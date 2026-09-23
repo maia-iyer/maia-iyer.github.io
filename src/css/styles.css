@@ -225,6 +225,83 @@ main {
   padding-bottom: 0;
 }
 
+.experience-list .experience-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.4rem 0;
+}
+
+.experience-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.experience-main > .list-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.15rem 0.85rem;
+  margin-bottom: 0;
+}
+
+.experience-main > .list-heading h3 {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.experience-main > .list-heading .org {
+  font-weight: 500;
+}
+
+.experience-main > .list-heading .org::before {
+  content: "·";
+  margin: 0 0.4em;
+  color: var(--muted);
+}
+
+.experience-list .experience-main > p,
+.experience-list .experience-main > ul {
+  margin: 0.15rem 0 0;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+}
+
+.experience-list .experience-main > ul {
+  padding-left: 1rem;
+}
+
+.experience-list .org-logo {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.25rem;
+  height: 4.25rem;
+  overflow: hidden;
+  border-radius: 0.4rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+.experience-list .org-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 0.3rem;
+}
+
+.experience-list .org-logo.is-placeholder::after {
+  content: "";
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 0.2rem;
+  background: var(--line);
+}
+
 .list.compact .list-item {
   display: flex;
   flex-wrap: wrap;
@@ -301,6 +378,18 @@ main {
   color: var(--ink-soft);
   font-size: 0.9rem;
   line-height: 1.45;
+}
+
+.list-item ul {
+  margin: 0.35rem 0 0;
+  padding-left: 1.15rem;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.list-item li + li {
+  margin-top: 0.2rem;
 }
 
 .works-grid {
@@ -609,6 +698,15 @@ main {
   .portrait {
     width: 6.5rem;
     height: 6.5rem;
+  }
+
+  .experience-list .experience-item {
+    align-items: flex-start;
+  }
+
+  .experience-main > .list-heading {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .list.compact .list-item {
