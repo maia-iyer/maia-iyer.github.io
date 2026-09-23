@@ -7,7 +7,7 @@
   --accent: #0d6e6e;
   --accent-hover: #0a5555;
   --surface: rgba(255, 255, 255, 0.55);
-  --max: 40rem;
+  --max: 58rem;
   --font-sans: "IBM Plex Sans", "Segoe UI", sans-serif;
   --font-serif: "IBM Plex Serif", Georgia, serif;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
@@ -121,8 +121,8 @@ main {
 
 .portrait {
   flex: 0 0 auto;
-  width: 7rem;
-  height: 7rem;
+  width: 8.5rem;
+  height: 8.5rem;
   object-fit: cover;
   object-position: center top;
   border-radius: 0.35rem;
@@ -149,7 +149,7 @@ main {
 
 .lede {
   margin: 0 0 1rem;
-  max-width: 34rem;
+  max-width: 46rem;
   font-size: 1rem;
   line-height: 1.45;
   color: var(--ink-soft);
@@ -411,8 +411,8 @@ main {
   }
 
   .portrait {
-    width: 5.5rem;
-    height: 5.5rem;
+    width: 6.5rem;
+    height: 6.5rem;
   }
 
   .list.compact .list-item {
