@@ -8,7 +8,12 @@ export default function (eleventyConfig) {
   );
 
   eleventyConfig.addCollection("works", (collection) =>
-    collection.getFilteredByGlob("src/works/*.md").sort((a, b) => a.data.order - b.data.order)
+    [
+      ...collection.getFilteredByGlob("src/talks/*.md"),
+      ...collection.getFilteredByGlob("src/writing/*.md"),
+    ]
+      .filter((item) => item.data.featured)
+      .sort((a, b) => a.data.featuredOrder - b.data.featuredOrder)
   );
 
   eleventyConfig.addCollection("writing", (collection) =>
