@@ -1,6 +1,6 @@
 ---
-label: Badge name
-hint: Credly embed
+label: B.S. Computer Science
+hint: Carnegie Mellon University
 image: ""
 url: ""
 order: 2
