@@ -281,8 +281,15 @@ permalink: /
         <h2>Credentials</h2>
         <ul class="badge-row" aria-label="Credentials">
           {% for item in collections.credentials %}
-          <li class="badge-slot">
-            {% if item.data.image %}
+          <li class="badge-slot{% if item.data.credly %} badge-slot--credly{% endif %}">
+            {% if item.data.credly %}
+            <div
+              data-iframe-width="150"
+              data-iframe-height="270"
+              data-share-badge-id="{{ item.data.credly }}"
+              data-share-badge-host="https://www.credly.com"
+            ></div>
+            {% elif item.data.image %}
             {% if item.data.url %}
             <a href="{{ item.data.url }}" target="_blank" rel="noopener noreferrer">
               <img src="{{ item.data.image }}" alt="{{ item.data.label }}" />
@@ -313,6 +320,10 @@ permalink: /
       </ul>
     </footer>
 
+    <script
+      async
+      src="https://cdn.credly.com/assets/utilities/embed.js"
+    ></script>
     <script src="/js/main.js"></script>
   </body>
 </html>

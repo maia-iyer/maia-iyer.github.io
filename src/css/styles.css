@@ -588,8 +588,8 @@ main {
 }
 
 .badge-row {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 0.65rem;
   margin: 0;
   padding: 0;
@@ -603,10 +603,19 @@ main {
   justify-content: center;
   gap: 0.2rem;
   min-height: 5.25rem;
+  min-width: 7.5rem;
   padding: 0.65rem;
   background: var(--surface);
   border: 1px dashed var(--line);
   text-align: center;
+}
+
+.badge-slot--credly {
+  min-height: 0;
+  min-width: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
 }
 
 .badge-label {

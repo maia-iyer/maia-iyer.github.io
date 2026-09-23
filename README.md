@@ -22,7 +22,7 @@ Open the URL Eleventy prints (usually `http://localhost:8080`).
 | Technical publications (Medium + papers) | `src/writing/*.md` |
 | Conference talks & podcasts | `src/talks/*.md` |
 | Experience & education | `src/experience/*.md` — set `logo:` to a file under `src/assets/orgs/` |
-| Credentials badges | `src/credentials/*.md` |
+| Credentials badges | `src/credentials/*.md` — set `credly:` to a Credly badge UUID to embed |
 | Layout / styles | `src/index.njk`, `src/css/styles.css` |
 
 ### Talks (`src/talks/*.md`)
