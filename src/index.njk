@@ -97,12 +97,17 @@ permalink: /
           {% for item in collections.writing %}
           {% if item.data.type == "medium" %}
           <li class="list-item">
-            <a
-              href="{{ item.data.url }}"
-              target="_blank"
-              rel="noopener noreferrer"
-              >{{ item.data.title }}</a
-            >
+            <div class="list-main">
+              <a
+                href="{{ item.data.url }}"
+                target="_blank"
+                rel="noopener noreferrer"
+                >{{ item.data.title }}</a
+              >
+              {% if item.data.authors %}
+              <span class="authors">{{ item.data.authors }}</span>
+              {% endif %}
+            </div>
             <span class="dates">{{ item.data.meta }}</span>
           </li>
           {% endif %}
@@ -114,12 +119,17 @@ permalink: /
           {% for item in collections.writing %}
           {% if item.data.type == "paper" %}
           <li class="list-item">
-            <a
-              href="{{ item.data.url }}"
-              target="_blank"
-              rel="noopener noreferrer"
-              >{{ item.data.title }}</a
-            >
+            <div class="list-main">
+              <a
+                href="{{ item.data.url }}"
+                target="_blank"
+                rel="noopener noreferrer"
+                >{{ item.data.title }}</a
+              >
+              {% if item.data.authors %}
+              <span class="authors">{{ item.data.authors }}</span>
+              {% endif %}
+            </div>
             <span class="dates">{{ item.data.meta }}</span>
           </li>
           {% endif %}
@@ -135,16 +145,21 @@ permalink: /
           {% for item in collections.talks %}
           {% if item.data.status == "upcoming" %}
           <li class="list-item">
-            {% if item.data.url %}
-            <a
-              href="{{ item.data.url }}"
-              target="_blank"
-              rel="noopener noreferrer"
-              >{{ item.data.title }}</a
-            >
-            {% else %}
-            <span class="talk-title">{{ item.data.title }}</span>
-            {% endif %}
+            <div class="list-main">
+              {% if item.data.url %}
+              <a
+                href="{{ item.data.url }}"
+                target="_blank"
+                rel="noopener noreferrer"
+                >{{ item.data.title }}</a
+              >
+              {% else %}
+              <span class="talk-title">{{ item.data.title }}</span>
+              {% endif %}
+              {% if item.data.authors %}
+              <span class="authors">{{ item.data.authors }}</span>
+              {% endif %}
+            </div>
             <span class="dates">{{ item.data.meta }}</span>
           </li>
           {% endif %}
@@ -156,12 +171,17 @@ permalink: /
           {% for item in collections.talks %}
           {% if item.data.status == "recorded" %}
           <li class="list-item">
-            <a
-              href="{{ item.data.url }}"
-              target="_blank"
-              rel="noopener noreferrer"
-              >{{ item.data.title }}</a
-            >
+            <div class="list-main">
+              <a
+                href="{{ item.data.url }}"
+                target="_blank"
+                rel="noopener noreferrer"
+                >{{ item.data.title }}</a
+              >
+              {% if item.data.authors %}
+              <span class="authors">{{ item.data.authors }}</span>
+              {% endif %}
+            </div>
             <span class="dates">{{ item.data.meta }}</span>
           </li>
           {% endif %}
