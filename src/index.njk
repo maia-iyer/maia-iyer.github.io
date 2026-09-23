@@ -116,6 +116,16 @@ permalink: /
         />
       </section>
 
+      {% if site.announcement %}
+      <aside class="announcement reveal" role="status">
+        <a class="announcement-link" href="{{ site.announcement.href }}">
+          <span class="announcement-label">Upcoming</span>
+          <span class="announcement-text">{{ site.announcement.text }}</span>
+          <span class="announcement-cta" aria-hidden="true">→</span>
+        </a>
+      </aside>
+      {% endif %}
+
       <section id="about" class="section reveal">
         <h2>About</h2>
         <div class="prose">
@@ -160,7 +170,7 @@ permalink: /
       <section id="talks" class="section reveal">
         <h2>Conference talks</h2>
 
-        <h3 class="subhead">Upcoming</h3>
+        <h3 id="talks-upcoming" class="subhead">Upcoming</h3>
         <ul class="list compact">
           {% for item in collections.talks %}
           {% if item.data.status == "upcoming" %}

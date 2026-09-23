@@ -6,6 +6,10 @@
   "lede": "Building secure-by-default, identity-first systems for zero trust, agentic security, and multicloud.",
   "portrait": "/assets/maia-iyer.jpg",
   "portraitAlt": "Portrait of Maia Iyer",
+  "announcement": {
+    "text": "Come see me at KubeCon NA!",
+    "href": "#talks-upcoming"
+  },
   "social": [
     { "label": "GitHub", "url": "https://github.com/maia-iyer" },
     { "label": "LinkedIn", "url": "https://www.linkedin.com/in/maia-iyer" },
