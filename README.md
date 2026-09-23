@@ -25,6 +25,19 @@ Open the URL Eleventy prints (usually `http://localhost:8080`).
 | Education & credentials | `src/credentials/*.md` |
 | Layout / styles | `src/index.njk`, `src/css/styles.css` |
 
+### Talks (`src/talks/*.md`)
+
+Titles are plain text. Optional resource links render next to the title when present:
+
+```yaml
+recording: https://...              # [recording]
+slides: /assets/2026.slides.foo.pdf # [slides]
+poster: /assets/2026.poster.foo.pdf # [poster]
+event: https://...                  # [event] (schedule / event page)
+```
+
+None of these fields are required. Drop PDFs under `src/assets/` (passthrough-copied to `/assets/`).
+
 ### Highlighted works
 
 The Highlighted works section is not a separate folder. Mark any talk or writing entry with:
