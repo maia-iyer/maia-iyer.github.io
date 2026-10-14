@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="{{ description or site.description }}" />
+    <title>{% if title %}{{ title }} · {% endif %}{{ site.title }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:ital,wght@0,500;0,600;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      {% include "nav.njk" %}
+    </header>
+
+    <main>
+      {{ content | safe }}
+    </main>
+
+    <footer class="site-footer">
+      <p>© <span id="year"></span> {{ site.name }}</p>
+      <ul class="social" aria-label="Footer social links">
+        {% for link in site.social %}
+        <li>
+          <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer"
+            >{{ link.label }}</a
+          >
+        </li>
+        {% endfor %}
+      </ul>
+    </footer>
+
+    <script src="/js/main.js"></script>
+  </body>
+</html>

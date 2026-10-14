@@ -1,0 +1,30 @@
+---
+layout: layouts/base.njk
+title: Blog
+description: Writing from Maia Iyer.
+permalink: /blog/
+---
+<section class="section blog-index">
+  <h1 class="page-title">Blog</h1>
+  <p class="blog-disclaimer">Opinions expressed here are my own and do not represent those of my employer.</p>
+
+  {% if collections.blog.length %}
+  <ul class="list">
+    {% for post in collections.blog %}
+    <li class="list-item">
+      <div class="list-heading">
+        <h3>
+          <a href="{{ post.url }}">{{ post.data.title }}</a>
+        </h3>
+        <time class="dates" datetime="{{ post.date.toISOString().slice(0, 10) }}">{{ post.date | readableDate }}</time>
+      </div>
+      {% if post.data.description %}
+      <p>{{ post.data.description }}</p>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p class="prose">No posts yet.</p>
+  {% endif %}
+</section>

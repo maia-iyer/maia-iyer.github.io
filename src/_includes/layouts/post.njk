@@ -1,0 +1,18 @@
+---
+layout: layouts/base.njk
+---
+<article class="post">
+  <header class="post-header">
+    <p class="post-back"><a href="/blog/">← Blog</a></p>
+    <h1 class="post-title">{{ title }}</h1>
+    {% if date %}
+    <time class="post-date" datetime="{{ date.toISOString().slice(0, 10) }}">{{ date | readableDate }}</time>
+    {% endif %}
+    {% if description %}
+    <p class="post-dek">{{ description }}</p>
+    {% endif %}
+  </header>
+  <div class="prose post-body">
+    {{ content | safe }}
+  </div>
+</article>

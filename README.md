@@ -19,11 +19,30 @@ Open the URL Eleventy prints (usually `http://localhost:8080`).
 | --- | --- |
 | Name, role, social links | `src/_data/site.json` |
 | About bio | `src/about.md` |
+| Blog posts | `src/blog/*.md` — URL is `/blog/yyyymmdd/<filename>/` |
 | Technical publications (Medium + papers) | `src/writing/*.md` |
 | Conference talks & podcasts | `src/talks/*.md` |
 | Experience & education | `src/experience/*.md` — set `logo:` to a file under `src/assets/orgs/` |
 | Credentials badges | `src/credentials/*.md` — set `credly:` to a Credly badge UUID to embed |
-| Layout / styles | `src/index.njk`, `src/css/styles.css` |
+| Layout / styles | `src/index.njk`, `src/_includes/`, `src/css/styles.css` |
+
+### Blog (`src/blog/*.md`)
+
+Posts are hosted on this site at `/blog/yyyymmdd/<slug>/`. Name the file with hyphenated words matching the title; the date comes from frontmatter:
+
+- `zero-trust-for-agents.md` with `date: 2026-10-13` → `/blog/20261013/zero-trust-for-agents/`
+
+```yaml
+---
+title: Zero trust for agents
+date: 2026-10-13
+description: Optional short summary for the blog index.
+---
+```
+
+**Drafts:** put `draft` in the filename (e.g. `draft-my-post.md`). Those files are gitignored so they stay local until you rename them; Eleventy still builds them so you can preview locally.
+
+The blog index lives at `/blog/`. Publications that live on Medium or elsewhere stay in `src/writing/`.
 
 ### Talks (`src/talks/*.md`)
 

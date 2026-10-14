@@ -1,4 +1,7 @@
 export default function (eleventyConfig) {
+  // Keep draft filenames gitignored without also excluding them from the build.
+  eleventyConfig.setUseGitIgnore(false);
+
   eleventyConfig.addPassthroughCopy("src/css");
   eleventyConfig.addPassthroughCopy("src/assets");
   eleventyConfig.addPassthroughCopy("src/js");
@@ -25,8 +28,34 @@ export default function (eleventyConfig) {
     }
   });
 
+  eleventyConfig.addFilter("readableDate", (date) => {
+    if (!date) return "";
+    return new Intl.DateTimeFormat("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      timeZone: "UTC",
+    }).format(date instanceof Date ? date : new Date(date));
+  });
+
+  eleventyConfig.addFilter("ymd", (date) => {
+    if (!date) return "";
+    const d = date instanceof Date ? date : new Date(date);
+    const y = d.getUTCFullYear();
+    const m = String(d.getUTCMonth() + 1).padStart(2, "0");
+    const day = String(d.getUTCDate()).padStart(2, "0");
+    return `${y}${m}${day}`;
+  });
+
   eleventyConfig.addCollection("about", (collection) =>
     collection.getFilteredByGlob("src/about.md")
+  );
+
+  eleventyConfig.addCollection("blog", (collection) =>
+    collection
+      .getFilteredByGlob("src/blog/*.md")
+      .filter((item) => !item.data.draft)
+      .sort((a, b) => b.date - a.date)
   );
 
   eleventyConfig.addCollection("works", (collection) =>
