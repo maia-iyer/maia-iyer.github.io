@@ -1,327 +1,123 @@
 ---
+layout: layouts/base.njk
 permalink: /
 ---
-{% macro talkLinks(item, skipRecording=false) %}
-{% set showRecording = item.data.recording and not skipRecording %}
-{% if showRecording or item.data.slides or item.data.poster or item.data.event %}
-<span class="talk-links">
-  {% if showRecording %}<a href="{{ item.data.recording }}" target="_blank" rel="noopener noreferrer">[recording]</a>{% endif %}
-  {% if item.data.slides %}<a href="{{ item.data.slides }}" target="_blank" rel="noopener noreferrer">[slides]</a>{% endif %}
-  {% if item.data.poster %}<a href="{{ item.data.poster }}" target="_blank" rel="noopener noreferrer">[poster]</a>{% endif %}
-  {% if item.data.event %}<a href="{{ item.data.event }}" target="_blank" rel="noopener noreferrer">[event]</a>{% endif %}
-</span>
-{% endif %}
-{% endmacro %}
-{% macro workMedia(item) %}
-{% set yt = item.data.recording | youtubeId %}
-{% if item.data.embed != false and yt %}
-<div class="work-media">
-  <button
-    type="button"
-    class="work-embed"
-    data-youtube-id="{{ yt }}"
-    aria-label="Play recording: {{ item.data.title }}"
-  >
-    <img
-      src="https://i.ytimg.com/vi/{{ yt }}/hqdefault.jpg"
-      alt=""
-      width="480"
-      height="360"
-      loading="lazy"
-      decoding="async"
-    />
-    <span class="work-embed-play" aria-hidden="true"></span>
-  </button>
-</div>
-{% elif item.data.embed != false and item.data.url and item.data.url != "#" %}
-{% set host = item.data.url | linkHost %}
-<a
-  class="work-media work-preview"
-  href="{{ item.data.url }}"
-  target="_blank"
-  rel="noopener noreferrer"
->
-  {% if item.data.image %}
+{% from "macros.njk" import talkLinks, workMedia %}
+
+<section class="hero" aria-labelledby="name">
+  <div class="hero-copy">
+    <p class="eyebrow">{{ site.role }}</p>
+    <h1 id="name" class="name">{{ site.name }}</h1>
+    <p class="lede">{{ site.lede }}</p>
+    <ul class="social" aria-label="Social links">
+      {% for link in site.social %}
+      <li>
+        <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer"
+          >{{ link.label }}</a
+        >
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
   <img
-    class="work-preview-image"
-    src="{{ item.data.image }}"
-    alt=""
-    width="320"
-    height="180"
-    loading="lazy"
-    decoding="async"
+    class="portrait"
+    src="{{ site.portrait }}"
+    alt="{{ site.portraitAlt }}"
+    width="176"
+    height="176"
   />
-  {% endif %}
-  <span class="work-preview-body">
-    {% if host %}<span class="work-preview-host">{{ host }}</span>{% endif %}
-    <span class="work-preview-title">{{ item.data.title }}</span>
-    {% if item.data.preview %}
-    <span class="work-preview-dek">{{ item.data.preview }}</span>
+</section>
+
+<section id="about" class="section">
+  <h2>About</h2>
+  <div class="prose">
+    {% for page in collections.about %}
+    {{ page.templateContent | safe }}
+    {% endfor %}
+  </div>
+</section>
+
+<section id="talks" class="section">
+  <h2>Upcoming talks</h2>
+  <ul class="list compact">
+    {% for item in collections.talks %}
+    {% if item.data.status == "upcoming" %}
+    <li class="list-item">
+      <div class="list-main">
+        <div class="talk-heading">
+          <span class="talk-title">{{ item.data.title }}</span>
+          {{ talkLinks(item) }}
+        </div>
+        {% if item.data.authors %}
+        <span class="authors">{{ item.data.authors }}</span>
+        {% endif %}
+      </div>
+      <span class="dates">{{ item.data.meta }}</span>
+    </li>
     {% endif %}
-  </span>
-</a>
-{% endif %}
-{% endmacro %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="{{ site.description }}" />
-    <title>{{ site.title }}</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:ital,wght@0,500;0,600;1,400&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="/css/styles.css" />
-  </head>
-  <body>
-    <header class="site-header">
-      {% include "nav.njk" %}
-    </header>
+    {% endfor %}
+  </ul>
+  <p class="section-more">
+    <a href="/professional/#talks">Past talks and more →</a>
+  </p>
+</section>
 
-    <main>
-      <section class="hero" aria-labelledby="name">
-        <div class="hero-copy">
-          <p class="eyebrow">{{ site.role }}</p>
-          <h1 id="name" class="name">{{ site.name }}</h1>
-          <p class="lede">{{ site.lede }}</p>
-          <ul class="social" aria-label="Social links">
-            {% for link in site.social %}
-            <li>
-              <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer"
-                >{{ link.label }}</a
-              >
-            </li>
-            {% endfor %}
-          </ul>
-        </div>
-        <img
-          class="portrait"
-          src="{{ site.portrait }}"
-          alt="{{ site.portraitAlt }}"
-          width="176"
-          height="176"
-        />
-      </section>
-
-      {% if site.announcement %}
-      <p class="announcement">
-        Upcoming:
-        <a href="{{ site.announcement.href }}">{{ site.announcement.text }}</a>
-      </p>
-      {% endif %}
-
-      <section id="about" class="section">
-        <h2>About</h2>
-        <div class="prose">
-          {% for page in collections.about %}
-          {{ page.templateContent | safe }}
-          {% endfor %}
-        </div>
-      </section>
-
-      <section id="works" class="section">
-        <h2>Highlighted works</h2>
-        <ul class="list works-grid">
-          {% for item in collections.works %}
-          <li class="list-item">
-            <div class="list-heading">
-              <span class="org">{{ item.data.kind }}</span>
-              <h3>
-                {% if item.data.status %}
-                <span class="talk-heading">
-                  <span class="talk-title">{{ item.data.title }}</span>
-                  {{ talkLinks(item, item.data.embed != false and (item.data.recording | youtubeId)) }}
-                </span>
-                {% elif item.data.url %}
-                <a
-                  href="{{ item.data.url }}"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >{{ item.data.title }}</a
-                >
-                {% else %}
-                {{ item.data.title }}
-                {% endif %}
-              </h3>
-            </div>
-            {{ item.templateContent | safe }}
-            {{ workMedia(item) }}
-          </li>
-          {% endfor %}
-        </ul>
-      </section>
-
-      <section id="talks" class="section">
-        <h2>Conference talks</h2>
-
-        <h3 id="talks-upcoming" class="subhead">Upcoming</h3>
-        <ul class="list compact">
-          {% for item in collections.talks %}
-          {% if item.data.status == "upcoming" %}
-          <li class="list-item">
-            <div class="list-main">
-              <div class="talk-heading">
-                <span class="talk-title">{{ item.data.title }}</span>
-                {{ talkLinks(item) }}
-              </div>
-              {% if item.data.authors %}
-              <span class="authors">{{ item.data.authors }}</span>
-              {% endif %}
-            </div>
-            <span class="dates">{{ item.data.meta }}</span>
-          </li>
-          {% endif %}
-          {% endfor %}
-        </ul>
-
-        <h3 class="subhead">Previous</h3>
-        <ul class="list compact">
-          {% for item in collections.talks %}
-          {% if item.data.status == "recorded" %}
-          <li class="list-item">
-            <div class="list-main">
-              <div class="talk-heading">
-                <span class="talk-title">{{ item.data.title }}</span>
-                {{ talkLinks(item) }}
-              </div>
-              {% if item.data.authors %}
-              <span class="authors">{{ item.data.authors }}</span>
-              {% endif %}
-            </div>
-            <span class="dates">{{ item.data.meta }}</span>
-          </li>
-          {% endif %}
-          {% endfor %}
-        </ul>
-      </section>
-
-      <section id="publications" class="section">
-        <h2>Technical Publications</h2>
-
-        <h3 class="subhead">Peer-reviewed papers</h3>
-        <ul class="list compact">
-          {% for item in collections.writing %}
-          {% if item.data.type == "paper" %}
-          <li class="list-item">
-            <div class="list-main">
-              <a
-                href="{{ item.data.url }}"
-                target="_blank"
-                rel="noopener noreferrer"
-                >{{ item.data.title }}</a
-              >
-              {% if item.data.authors %}
-              <span class="authors">{{ item.data.authors }}</span>
-              {% endif %}
-            </div>
-            <span class="dates">{{ item.data.meta }}</span>
-          </li>
-          {% endif %}
-          {% endfor %}
-        </ul>
-
-        <h3 class="subhead">Medium</h3>
-        <ul class="list compact">
-          {% for item in collections.writing %}
-          {% if item.data.type == "medium" %}
-          <li class="list-item">
-            <div class="list-main">
-              <a
-                href="{{ item.data.url }}"
-                target="_blank"
-                rel="noopener noreferrer"
-                >{{ item.data.title }}</a
-              >
-              {% if item.data.authors %}
-              <span class="authors">{{ item.data.authors }}</span>
-              {% endif %}
-            </div>
-            <span class="dates">{{ item.data.meta }}</span>
-          </li>
-          {% endif %}
-          {% endfor %}
-        </ul>
-      </section>
-
-      <section id="experience" class="section">
-        <h2>Experience</h2>
-        <ul class="list experience-list">
-          {% for item in collections.experience %}
-          <li class="list-item experience-item">
-            <div
-              class="org-logo{% if not item.data.logo %} is-placeholder{% endif %}"
-              aria-hidden="true"
-            >
-              {% if item.data.logo %}
-              <img src="{{ item.data.logo }}" alt="" />
-              {% endif %}
-            </div>
-            <div class="experience-main">
-              <div class="list-heading">
-                <h3>
-                  {{ item.data.title }}
-                  <span class="org">{{ item.data.org }}</span>
-                </h3>
-                <span class="dates">{{ item.data.dates }}</span>
-              </div>
-              {{ item.templateContent | safe }}
-            </div>
-          </li>
-          {% endfor %}
-        </ul>
-      </section>
-
-      <section id="credentials" class="section">
-        <h2>Credentials</h2>
-        <ul class="badge-row" aria-label="Credentials">
-          {% for item in collections.credentials %}
-          <li class="badge-slot{% if item.data.credly %} badge-slot--credly{% endif %}">
-            {% if item.data.credly %}
-            <div
-              data-iframe-width="150"
-              data-iframe-height="270"
-              data-share-badge-id="{{ item.data.credly }}"
-              data-share-badge-host="https://www.credly.com"
-            ></div>
-            {% elif item.data.image %}
-            {% if item.data.url %}
-            <a href="{{ item.data.url }}" target="_blank" rel="noopener noreferrer">
-              <img src="{{ item.data.image }}" alt="{{ item.data.label }}" />
-            </a>
-            {% else %}
-            <img src="{{ item.data.image }}" alt="{{ item.data.label }}" />
-            {% endif %}
-            {% else %}
-            <span class="badge-label">{{ item.data.label }}</span>
-            <span class="badge-hint">{{ item.data.hint }}</span>
-            {% endif %}
-          </li>
-          {% endfor %}
-        </ul>
-      </section>
-    </main>
-
-    <footer class="site-footer">
-      <p>© <span id="year"></span> {{ site.name }}</p>
-      <ul class="social" aria-label="Footer social links">
-        {% for link in site.social %}
-        <li>
-          <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer"
-            >{{ link.label }}</a
+<section id="works" class="section">
+  <h2>Highlighted works</h2>
+  <ul class="list works-grid">
+    {% for item in collections.works %}
+    <li class="list-item">
+      <div class="list-heading">
+        <span class="org">{{ item.data.kind }}</span>
+        <h3>
+          {% if item.data.status %}
+          <span class="talk-heading">
+            <span class="talk-title">{{ item.data.title }}</span>
+            {{ talkLinks(item, item.data.embed != false and (item.data.recording | youtubeId)) }}
+          </span>
+          {% elif item.data.url %}
+          <a
+            href="{{ item.data.url }}"
+            target="_blank"
+            rel="noopener noreferrer"
+            >{{ item.data.title }}</a
           >
-        </li>
-        {% endfor %}
-      </ul>
-    </footer>
+          {% else %}
+          {{ item.data.title }}
+          {% endif %}
+        </h3>
+      </div>
+      {{ item.templateContent | safe }}
+      {{ workMedia(item) }}
+    </li>
+    {% endfor %}
+  </ul>
+</section>
 
-    <script
-      async
-      src="https://cdn.credly.com/assets/utilities/embed.js"
-    ></script>
-    <script src="/js/main.js"></script>
-  </body>
-</html>
+<section id="writing" class="section">
+  <h2>From the blog</h2>
+  {% if collections.blog.length %}
+  <ul class="list">
+    {% for post in collections.blog %}
+    {% if loop.index0 < 2 %}
+    <li class="list-item">
+      <div class="list-heading">
+        <h3>
+          <a href="{{ post.url }}">{{ post.data.title }}</a>
+        </h3>
+        <time class="dates" datetime="{{ post.date.toISOString().slice(0, 10) }}">{{ post.date | readableDate }}</time>
+      </div>
+      {% if post.data.description %}
+      <p>{{ post.data.description }}</p>
+      {% endif %}
+    </li>
+    {% endif %}
+    {% endfor %}
+  </ul>
+  <p class="section-more">
+    <a href="/blog/">All posts →</a>
+  </p>
+  {% else %}
+  <p class="prose">No posts yet.</p>
+  {% endif %}
+</section>

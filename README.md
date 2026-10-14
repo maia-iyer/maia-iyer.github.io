@@ -24,7 +24,9 @@ Open the URL Eleventy prints (usually `http://localhost:8080`).
 | Conference talks & podcasts | `src/talks/*.md` |
 | Experience & education | `src/experience/*.md` — set `logo:` to a file under `src/assets/orgs/` |
 | Credentials badges | `src/credentials/*.md` — set `credly:` to a Credly badge UUID to embed |
-| Layout / styles | `src/index.njk`, `src/_includes/`, `src/css/styles.css` |
+| Home page | `src/index.njk` — about, highlighted works, upcoming talks, recent posts |
+| Professional page | `src/professional.njk` — past talks, publications, experience, credentials |
+| Layout / styles | `src/_includes/`, `src/css/styles.css` |
 
 ### Blog (`src/blog/*.md`)
 

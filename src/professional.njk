@@ -1,0 +1,139 @@
+---
+layout: layouts/base.njk
+title: Professional
+description: Talks, publications, experience, and credentials — Maia Iyer.
+permalink: /professional/
+credlyEmbed: true
+---
+{% from "macros.njk" import talkLinks %}
+
+<section class="section page-intro">
+  <h1 class="page-title">Professional</h1>
+</section>
+
+<section id="talks" class="section">
+  <h2>Select speaking engagements</h2>
+  <ul class="list compact">
+    {% for item in collections.talks %}
+    {% if item.data.status == "recorded" %}
+    <li class="list-item">
+      <div class="list-main">
+        <div class="talk-heading">
+          <span class="talk-title">{{ item.data.title }}</span>
+          {{ talkLinks(item) }}
+        </div>
+        {% if item.data.authors %}
+        <span class="authors">{{ item.data.authors }}</span>
+        {% endif %}
+      </div>
+      <span class="dates">{{ item.data.meta }}</span>
+    </li>
+    {% endif %}
+    {% endfor %}
+  </ul>
+</section>
+
+<section id="publications" class="section">
+  <h2>Technical Publications</h2>
+
+  <h3 class="subhead">Peer-reviewed papers</h3>
+  <ul class="list compact">
+    {% for item in collections.writing %}
+    {% if item.data.type == "paper" %}
+    <li class="list-item">
+      <div class="list-main">
+        <a
+          href="{{ item.data.url }}"
+          target="_blank"
+          rel="noopener noreferrer"
+          >{{ item.data.title }}</a
+        >
+        {% if item.data.authors %}
+        <span class="authors">{{ item.data.authors }}</span>
+        {% endif %}
+      </div>
+      <span class="dates">{{ item.data.meta }}</span>
+    </li>
+    {% endif %}
+    {% endfor %}
+  </ul>
+
+  <h3 class="subhead">Medium</h3>
+  <ul class="list compact">
+    {% for item in collections.writing %}
+    {% if item.data.type == "medium" %}
+    <li class="list-item">
+      <div class="list-main">
+        <a
+          href="{{ item.data.url }}"
+          target="_blank"
+          rel="noopener noreferrer"
+          >{{ item.data.title }}</a
+        >
+        {% if item.data.authors %}
+        <span class="authors">{{ item.data.authors }}</span>
+        {% endif %}
+      </div>
+      <span class="dates">{{ item.data.meta }}</span>
+    </li>
+    {% endif %}
+    {% endfor %}
+  </ul>
+</section>
+
+<section id="experience" class="section">
+  <h2>Experience</h2>
+  <ul class="list experience-list">
+    {% for item in collections.experience %}
+    <li class="list-item experience-item">
+      <div
+        class="org-logo{% if not item.data.logo %} is-placeholder{% endif %}"
+        aria-hidden="true"
+      >
+        {% if item.data.logo %}
+        <img src="{{ item.data.logo }}" alt="" />
+        {% endif %}
+      </div>
+      <div class="experience-main">
+        <div class="list-heading">
+          <h3>
+            {{ item.data.title }}
+            <span class="org">{{ item.data.org }}</span>
+          </h3>
+          <span class="dates">{{ item.data.dates }}</span>
+        </div>
+        {{ item.templateContent | safe }}
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+
+<section id="credentials" class="section">
+  <h2>Credentials</h2>
+  <ul class="badge-row" aria-label="Credentials">
+    {% for item in collections.credentials %}
+    <li class="badge-slot{% if item.data.credly %} badge-slot--credly{% endif %}">
+      {% if item.data.credly %}
+      <div
+        data-iframe-width="150"
+        data-iframe-height="270"
+        data-share-badge-id="{{ item.data.credly }}"
+        data-share-badge-host="https://www.credly.com"
+      ></div>
+      {% elif item.data.image %}
+      {% if item.data.url %}
+      <a href="{{ item.data.url }}" target="_blank" rel="noopener noreferrer">
+        <img src="{{ item.data.image }}" alt="{{ item.data.label }}" />
+      </a>
+      {% else %}
+      <img src="{{ item.data.image }}" alt="{{ item.data.label }}" />
+      {% endif %}
+      {% else %}
+      <span class="badge-label">{{ item.data.label }}</span>
+      <span class="badge-hint">{{ item.data.hint }}</span>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+</section>
