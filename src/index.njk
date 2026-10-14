@@ -78,8 +78,6 @@ permalink: /
     <link rel="stylesheet" href="/css/styles.css" />
   </head>
   <body>
-    <div class="atmosphere" aria-hidden="true"></div>
-
     <header class="site-header">
       <nav class="nav" aria-label="Primary">
         <a href="#about">About</a>
@@ -94,10 +92,10 @@ permalink: /
     <main>
       <section class="hero" aria-labelledby="name">
         <div class="hero-copy">
-          <p class="eyebrow reveal">{{ site.role }}</p>
-          <h1 id="name" class="name reveal">{{ site.name }}</h1>
-          <p class="lede reveal">{{ site.lede }}</p>
-          <ul class="social reveal" aria-label="Social links">
+          <p class="eyebrow">{{ site.role }}</p>
+          <h1 id="name" class="name">{{ site.name }}</h1>
+          <p class="lede">{{ site.lede }}</p>
+          <ul class="social" aria-label="Social links">
             {% for link in site.social %}
             <li>
               <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer"
@@ -108,7 +106,7 @@ permalink: /
           </ul>
         </div>
         <img
-          class="portrait reveal"
+          class="portrait"
           src="{{ site.portrait }}"
           alt="{{ site.portraitAlt }}"
           width="176"
@@ -117,16 +115,13 @@ permalink: /
       </section>
 
       {% if site.announcement %}
-      <aside class="announcement reveal" role="status">
-        <a class="announcement-link" href="{{ site.announcement.href }}">
-          <span class="announcement-label">Upcoming</span>
-          <span class="announcement-text">{{ site.announcement.text }}</span>
-          <span class="announcement-cta" aria-hidden="true">→</span>
-        </a>
-      </aside>
+      <p class="announcement">
+        Upcoming:
+        <a href="{{ site.announcement.href }}">{{ site.announcement.text }}</a>
+      </p>
       {% endif %}
 
-      <section id="about" class="section reveal">
+      <section id="about" class="section">
         <h2>About</h2>
         <div class="prose">
           {% for page in collections.about %}
@@ -135,7 +130,7 @@ permalink: /
         </div>
       </section>
 
-      <section id="works" class="section reveal">
+      <section id="works" class="section">
         <h2>Highlighted works</h2>
         <ul class="list works-grid">
           {% for item in collections.works %}
@@ -167,7 +162,7 @@ permalink: /
         </ul>
       </section>
 
-      <section id="talks" class="section reveal">
+      <section id="talks" class="section">
         <h2>Conference talks</h2>
 
         <h3 id="talks-upcoming" class="subhead">Upcoming</h3>
@@ -211,7 +206,7 @@ permalink: /
         </ul>
       </section>
 
-      <section id="publications" class="section reveal">
+      <section id="publications" class="section">
         <h2>Technical Publications</h2>
 
         <h3 class="subhead">Peer-reviewed papers</h3>
@@ -259,7 +254,7 @@ permalink: /
         </ul>
       </section>
 
-      <section id="experience" class="section reveal">
+      <section id="experience" class="section">
         <h2>Experience</h2>
         <ul class="list experience-list">
           {% for item in collections.experience %}
@@ -287,7 +282,7 @@ permalink: /
         </ul>
       </section>
 
-      <section id="credentials" class="section reveal">
+      <section id="credentials" class="section">
         <h2>Credentials</h2>
         <ul class="badge-row" aria-label="Credentials">
           {% for item in collections.credentials %}
@@ -317,7 +312,7 @@ permalink: /
       </section>
     </main>
 
-    <footer class="site-footer reveal">
+    <footer class="site-footer">
       <p>© <span id="year"></span> {{ site.name }}</p>
       <ul class="social" aria-label="Footer social links">
         {% for link in site.social %}
